@@ -1,0 +1,45 @@
+{
+  "blockNumber": 65874950,
+  "chainId": 10143,
+  "deployedAt": 1790433110,
+  "deployer": "0x67aD0CaE18528017B79E0aF8C4D3dd5937caFF19",
+  "feeRecipient": "0x67aD0CaE18528017B79E0aF8C4D3dd5937caFF19",
+  "minter": "0xAB6127BccceE568f3622B96e75A0F8E24b414Bfb",
+  "platformFeeBps": 0,
+  "router": "0x62467f7c7F0f25CCdE0059D89d6e72524bC2cf95",
+  "routerDelay": 0,
+  "settleSlippageBps": 100,
+  "tokens": [
+    {
+      "address": "0x783D4800fdC2Cea696ed61a12747737E8eA7045d",
+      "decimals": 6,
+      "isBase": true,
+      "symbol": "tUSDC"
+    },
+    {
+      "address": "0xB8B2457fC6443F94DbDbe8618f14d181eEDC4492",
+      "decimals": 18,
+      "isBase": false,
+      "symbol": "tWETH"
+    },
+    {
+      "address": "0x530aDB5222F9b9372b65fBE799bb3dD1eb11062a",
+      "decimals": 8,
+      "isBase": false,
+      "symbol": "tWBTC"
+    }
+  ],
+  "vault": {
+    "implementation": "0x9A55fE0356BFAcae177914b7D35f336FFf971d4F",
+    "proxy": "0xBA08F3Fd93837408EfBCe300826f6a75181624e3"
+  },
+  "txHashes": {
+    "tUSDC": "0x60867e3bb748df3d744f990282ac7216768763e8adeb9f8d622e7f5c18cd5a57",
+    "tWETH": "0x4ef827884b0d1d2cba5542979e3bcfcbe1be50d1db6288f1795d853f0373f0a2",
+    "tWBTC": "0xb5e938f0bed61e01ed73bca72158aec2a5792e72c6c4223929bd388169d5b000",
+    "router": "0x1f9a76e3c23e91f62e0c5295f25b4683a1de21482f53313044bd6b7d256193b8",
+    "vaultImplementation": "0xf4548d2dcd07e9df9344fd40292dbf2ee770dbaa64f937f32b5df0c737d1a250",
+    "vaultProxy": "0x5bb72a769af590a43bd9903dcf913ed7490ac1a0d65acf1bf822dcaaab3c2a85"
+  },
+  "gitCommit": "357a6c06c776a0a64e6203311586053c2f0c21b9"
+}

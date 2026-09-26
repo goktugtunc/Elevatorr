@@ -1,0 +1,67 @@
+name: traderkirala
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: traderkirala-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: traderkirala
+      POSTGRES_USER: trader
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - traderkirala_pgdata:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    networks: [traderkirala_net]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trader -d traderkirala"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    # No host port: only reachable from the compose network.
+
+  api:
+    build:
+      context: .
+      args:
+        INSTALL_DEV: "${INSTALL_DEV:-0}"
+    image: traderkirala-api:latest
+    container_name: traderkirala-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trader:${POSTGRES_PASSWORD}@db:5432/traderkirala
+      UVICORN_WORKERS: "2"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [traderkirala_net]
+    ports:
+      - "127.0.0.1:8013:8000"   # localhost only; nginx (monadback.yolalapp.com) fronts it
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # Background worker: same image, `python -m app.worker.main` — indexer, pending tracker, reconciler,
+  # offer expiry, push, fx. Exactly one replica.
+  worker:
+    image: traderkirala-api:latest
+    container_name: traderkirala-worker
+    restart: unless-stopped
+    command: ["worker"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trader:${POSTGRES_PASSWORD}@db:5432/traderkirala
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [traderkirala_net]
+
+networks:
+  traderkirala_net:
+
+volumes:
+  traderkirala_pgdata:

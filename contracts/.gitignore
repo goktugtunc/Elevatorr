@@ -1,0 +1,12 @@
+# Foundry build artefaktları
+out/
+cache/
+
+# forge install --no-git ile kurulan bağımlılıklar (Makefile `setup` ile yeniden kurulur)
+lib/
+
+# forge script kuru çalıştırma çıktıları (gerçek yayınlar commit'lenir)
+broadcast/**/dry-run/
+
+# Yerel gizli değişkenler
+.env

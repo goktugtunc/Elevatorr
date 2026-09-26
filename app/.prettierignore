@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.expo/
+web-build/
+package-lock.json
+# Üretilen dosyalar (openapi-typescript, contracts/scripts/export-abi.sh)
+src/lib/api/schema.d.ts
+src/lib/chain/abi/traderVault.ts
+src/lib/chain/abi/mockRouter.ts

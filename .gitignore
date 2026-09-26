@@ -1,0 +1,39 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Node (her paket kendi node_modules'ını tutar)
+node_modules/
+
+# Rust / Soroban (contracts/)
+target/
+*.wasm
+
+# Logs
+*.log
+
+# Claude desktop uygulamasının sohbet çıktıları (repoya girmez)
+Claude outputs/
+
+# Foundry (contracts/)
+contracts/lib/
+contracts/dependencies/
+contracts/out/
+contracts/cache/
+contracts/broadcast/**/dry-run/
+# Backend local
+backend/.venv/
+# App
+app/openapi.json
+contracts/deployments/anvil-local.json
